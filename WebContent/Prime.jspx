@@ -33,7 +33,7 @@
                     <div class="panel-heading">
                         <a role="button" class="btn btn-sm btn-link" href="Dash.do"><span class="glyphicon glyphicon-triangle-left" /> Dashboard <span class="glyphicon glyphicon-triangle-left" /></a><strong> Prime Number Finder</strong></div>
                     <div class="panel-body">
-                        <form method="POST" action="" role="form">
+                        <form method="POST" action="Prime.do" role="form">
                             <fieldset>
                                 <div class="row">
                                     <div class="center-block"><img alt="" src="/JspxExercise/res/Dash.png" class="profile-img" /></div>
@@ -55,28 +55,27 @@
                                         </div>
                                     
 									
-									
-									<c:if test="${!empty error}">
-
-										<h4 class="text-center" id="result">${result}</h4>
-									    <input value="" name="last" type="hidden"/>
-   										<input value="next" name="recalc" type="submit"/>
-									
-									</c:if>
-									
-									<c:if test="${!empty result}">
-									
-										<h4 style="color: red;" class="text-center"><i>No more primes in range.</i></h4>
-									
-									</c:if>
-									
-									<c:if test="${found eq 'negative'}">
-									
-										<h4 style="color: red;" class="text-center"><i>start &lt; 0: ${min}</i></h4>
-									
-									</c:if>
-									
-									
+																		
+									<c:choose>
+									    <c:when test="${found == '1'}">
+									        <h4 class="text-center" id="result">${result}
+									    	<input value="${result}" name="last" type="hidden"/>
+   											<input value="next" name="recalc" type="submit"/>
+   											</h4>
+									    </c:when>
+									    <c:when test="${found == 2}">
+									        <h4 style="color: red;" class="text-center"><i>No more primes in range.</i></h4>
+									    </c:when>
+									    <c:when test="${found == 3}">
+									        <h4 style="color: red;" class="text-center"><i>start &lt; 0: ${min}</i></h4>
+									    </c:when>
+									    <c:when test="${found == 4}">
+									        <h4 style="color: red;" class="text-center"><i>${error}</i></h4>
+									    </c:when>
+									    <c:otherwise>
+									        
+									    </c:otherwise>
+									</c:choose>
 									
 									
 									</div>

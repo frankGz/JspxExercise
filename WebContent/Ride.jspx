@@ -43,7 +43,7 @@
                     <div class="panel-heading">
                         <a role="button" class="btn btn-sm btn-link" href="Dash.do"><span class="glyphicon glyphicon-triangle-left" /> Dashboard <span class="glyphicon glyphicon-triangle-left" /></a><strong> Ride Estimator</strong></div>
                     <div class="panel-body">
-                        <form method="POST" action="" role="form">
+                        <form method="POST" action="Ride.do" role="form">
                             <fieldset>
                                 <div class="row">
                                     <div class="center-block"><img alt="" src="/JspxExercise/res/Dash.png" class="profile-img" /></div>
@@ -64,7 +64,7 @@
                                             <input value="Estimate Cost in Traffic" name="calc" class="btn btn-lg btn-primary btn-block" type="submit" />
                                         </div>
                                     </div>
-                                </div>
+                                 <h2 class="text-center" id="result">${result}</h2></div>
                             </fieldset>
                         </form>
                     </div>

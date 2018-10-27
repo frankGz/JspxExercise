@@ -26,6 +26,26 @@ public class Prime extends HttpServlet {
 		  }
 		else if (request.getParameter("calc") == null) // submitted by recalc
 		{
+			System.out.println("execute Prime.do recalc");
+				int min = Integer.parseInt(request.getParameter("last"));
+				int max = Integer.parseInt(request.getParameter("max"));
+				request.setAttribute("min", min);
+				request.setAttribute("max", max);
+				Engine engine = Engine.getInstance();
+				try {
+					int prime = engine.doPrime(min, max);
+					if (prime != -1) {
+						request.setAttribute("result", prime);
+						request.setAttribute("found", 1);
+					} else {
+						request.setAttribute("found", 2);
+					}
+				} catch (Exception e) {
+					request.setAttribute("found", 4);
+					request.setAttribute("error", e.getMessage());
+					e.printStackTrace();
+				} 
+			request.getRequestDispatcher("/Prime.jspx").forward(request, response);
 			
 		}
 		else // submitted by calc
@@ -41,17 +61,25 @@ public class Prime extends HttpServlet {
 				try {
 					int prime = engine.doPrime(min, max);
 					if (prime != -1) {
+						// we have a result
 						request.setAttribute("result", prime);
-						request.setAttribute("found", "found");
+						request.setAttribute("found", 1);
 					} else {
-						request.setAttribute("found", "nomore");
+						//no result in range
+						request.setAttribute("found", 2);
 					}
 				} catch (Exception e) {
-					request.setAttribute("result", e.getMessage());
+					// exception found, put in error
+					request.setAttribute("found", 4);
+					request.setAttribute("error", e.getMessage());
 					e.printStackTrace();
 				} 
 			}else {
-				request.setAttribute("found", "negative");
+				// cannot start with negative
+				int max = Integer.parseInt(request.getParameter("max"));
+				request.setAttribute("min", min);
+				request.setAttribute("max", max);
+				request.setAttribute("found", 3);
 			}
 			request.getRequestDispatcher("/Prime.jspx").forward(request, response);
 		}

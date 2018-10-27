@@ -25,7 +25,7 @@ public class StudentDAO {
 	 */
 	public List<StudentBean> retrieve(String namePrefix, String minGpa, String sorting) throws Exception{
 		List<StudentBean> list = new ArrayList<>();
-		String query = "SELECT SURNAME, GIVENNAME, MAJOR, COURSES, GPA FROM SIS WHERE SURENAME LIKE '" 
+		String query = "SELECT SURNAME, GIVENNAME, MAJOR, COURSES, GPA FROM SIS WHERE SURNAME LIKE '" 
 				+ namePrefix 
 				+ "%' AND GPA >="
 				+ minGpa
